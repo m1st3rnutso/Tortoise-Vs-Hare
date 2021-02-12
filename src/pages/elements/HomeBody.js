@@ -6,21 +6,19 @@ function HomeBody() {
             <div className="divider">
                 <h2 className="heading">What is this game?</h2>
                 <div className="content">
-                    <a className="button">
-                        <Link to="/about">About</Link>
-                    </a>
+                    <Link to="/about" className="button item">About</Link>
                 </div>
             </div>
             <div className="divider">
                 <h2 className="heading">Hop in and play!</h2>
                 <div className="content">
-                    <a href="about.html" className="button">Play!</a>
+                    <a href="about.html" className="button item">Play!</a>
                 </div>
             </div>
             <div className="divider">
                 <h2 className="heading">Learn how to play!</h2>
                 <div className="content">
-                    <a href="about.html" className="button">Tutorial</a>
+                    <a href="about.html" className="button item">Tutorial</a>
                 </div>
             </div>
 		</div>
