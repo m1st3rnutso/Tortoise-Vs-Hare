@@ -1,3 +1,3 @@
-export default function MyProfile() {
-    return ( <div>profile</div>)
+export default function MyProfile() { 
+    return ( <div>profile</div>) 
 }
