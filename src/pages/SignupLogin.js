@@ -6,22 +6,16 @@ import LoginSignupBody from "./elements/LoginSignupBody"
 
 const PAGE_HEADING = "Signup or Login"
 
-class SignupLogin extends React.Component {
-    constructor() {
-        super()
-    }
-
-    render() {
-        return (
-            <div className="content">
-                <Header />
-                <div className="woodBackground">
-                    <NavigationBar heading={PAGE_HEADING}/>
-                    <LoginSignupBody />
-                </div>
+function SignupLogin(props) {
+    return (
+        <div className="content">
+            <Header />
+            <div className="woodBackground">
+                <NavigationBar heading={PAGE_HEADING}/>
+                <LoginSignupBody handleInput={props.handleInput} state={props.state}/>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default SignupLogin

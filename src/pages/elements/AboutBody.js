@@ -1,4 +1,4 @@
-import {BrowserRouter, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import Tortoise from "../resources/tortoise.fw.png"
 import Hare from "../resources/hare.fw.png"

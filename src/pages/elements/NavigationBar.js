@@ -10,7 +10,9 @@ function NavigationBar(props) {
                 <h1>{props.heading}</h1>
             </div>
             <div className="buttonContainer">
-                <Link to="/myProfile" className="button item">My Profile</Link>
+                {props.heading !== "My Profile" ? 
+                <Link to="/myProfile" className="button item">My Profile</Link> : 
+                <Link to="/home" onClick={props.handleInput} className="button item" name="logout">Logout</Link>}
             </div>
                 {/* <img src="images/hare.png" alt="hare" id="navigationBarHare" /> */}
                 {/* <img src="images/tortoise.png" alt="tortoise" id="navigationBarTortoise" /> */}

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom' 
  
-function LoginSignupBody() { 
+function LoginSignupBody(props) {
     return ( 
         <div className="body"> 
             <div className="divider"> 
@@ -12,11 +12,11 @@ function LoginSignupBody() {
             <div className="divider"> 
                 <h2 className="heading">Login to an existing account</h2> 
                 <div className="content"> 
-                    <label class="input-label">Your Name</label> 
-                    <input type="text" id="name" name="name" placeholder="Name..." /> 
-                    <label class="input-label">Your Password</label> 
-                    <input type="password" id="password" name="password" placeholder="Password..." /> 
-                    <a class="loginButton item">Login</a> 
+                    <label >Your Name</label> 
+                    <input onChange={props.handleInput} className="item" type="text" name="name" placeholder="Name..." /> 
+                    <label >Your Password</label> 
+                    <input onChange={props.handleInput} className="item" type="password" name="password" placeholder="Password..." /> 
+                    <Link to="/myProfile" onClick={props.handleInput} className="loginSignupButton item" name="login">Login</Link>
                 </div> 
             </div> 
 		</div> 
