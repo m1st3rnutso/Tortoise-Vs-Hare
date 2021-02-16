@@ -16,7 +16,13 @@ function LoginSignupBody(props) {
                     <input onChange={props.handleInput} className="item" type="text" name="name" placeholder="Name..." /> 
                     <label >Your Password</label> 
                     <input onChange={props.handleInput} className="item" type="password" name="password" placeholder="Password..." /> 
-                    <Link to="/myProfile" onClick={props.handleInput} className="loginSignupButton item" name="login">Login</Link>
+                    <Link 
+                        to="/myProfile" 
+                        onClick={props.handleInput} 
+                        className="loginSignupButton item" 
+                        name="login">
+                        {!props.state.loggingIn ? "Login" : "Logging In..."}
+                    </Link>
                 </div> 
             </div> 
 		</div> 

@@ -39,7 +39,13 @@ function SignUpBody(props) {
                 <h2 className="heading">Click to change your tortoise</h2> 
                 <div className="content"> 
                     <img onClick={props.handleInput} src={props.state.tortoise.source} alt="tortoise" className="character item" name="tortoise"/>
-                    <Link to="/myProfile" onClick={props.handleInput} className="loginSignupButton item" name="signUp">Create!</Link>
+                    <Link 
+                        to="/signUp" 
+                        onClick={props.handleInput} 
+                        className="loginSignupButton item" 
+                        name="signUp">
+                        {!props.state.creatingAccount ? "Create!" : "Creating..."}
+                    </Link>
                 </div>
             </div> 
 		</div> 

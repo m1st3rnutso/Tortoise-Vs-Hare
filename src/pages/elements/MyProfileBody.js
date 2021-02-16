@@ -11,6 +11,13 @@ function MyProfileBody(props) {
                         readOnly
                         value={props.state.name}
                     />
+                    <label>Progress Level</label> 
+                    <input
+                        type="text" 
+                        className="item" 
+                        readOnly
+                        value={props.state.progressLevel}
+                    />
                     <label>Year Level</label>  
                     <input 
                         name="yearLevel" 

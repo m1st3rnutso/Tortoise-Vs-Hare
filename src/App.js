@@ -16,7 +16,10 @@ const INITIAL_STATE={
   tortoise: Tortoises[0],
   name: "",
   password: "",
-  yearLevel: ""
+  yearLevel: 6,
+  progressLevel: 0,
+  loggingIn: false,
+  creatingAccount: false
 }
 
 class App extends React.Component {
@@ -25,9 +28,77 @@ class App extends React.Component {
     this.state=INITIAL_STATE
   }
 
+  async loginAttempt(name, password) { 
+    return await fetch("http://localhost:3001/loginAttempt", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name, password})
+  })
+  .then(async function(response) {
+      return response.json()
+  })
+  }
+
+  async createAccountAttempt(name, password, yearLevel, tortoise) { 
+    return await fetch("http://localhost:3001/createAccountAttempt", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name, password, yearLevel, tortoise})
+  })
+  .then(async function(response) {
+      return response.status
+  })
+  }
+
+  async databaseRequest() {
+    if (this.state.loggingIn) { 
+      const data = (await this.loginAttempt(this.state.name, this.state.password))[0]
+      if (data) { 
+        this.setState(() => {
+          return {
+            loggedIn: true,
+            tortoise: Tortoises[data.tortoise],
+            name: data.name,
+            yearLevel: data.yearLevel,
+            progressLevel: data.progressLevel
+          }
+        })
+      } else {
+        console.log("Incorrect Credentials")
+      }
+      this.setState(() => {
+        return {loggingIn: false}
+      })
+    } else if (this.state.creatingAccount) {
+      const status = (await this.createAccountAttempt(
+        this.state.name, 
+        this.state.password, 
+        this.state.yearLevel, 
+        this.state.tortoise.index)
+      )
+      if (status === 201) {
+        this.setState(() => {
+          return {
+            loggedIn: true
+          }
+        })
+      } else {
+        console.log(`Unable to create account: ${this.state.name}`)
+      }
+      this.setState(() => {
+        return {creatingAccount: false}
+      })
+    }
+  }
+
   handleInput = (event) => {
     const eventTargetName = event.target.name
-    this.setState((previousState) => {
+    const eventTargetValue = event.target.value
+    this.setState( (previousState) => {
       if (eventTargetName === "tortoise") {
         const previousTortoisIndex = previousState.tortoise.index
         return {
@@ -36,17 +107,16 @@ class App extends React.Component {
           Tortoises[0]
         }
       } else if (eventTargetName === "signUp") {
-        // TODO: database insert
-        return {loggedIn: true}
+        return {creatingAccount: true}
       } else if (eventTargetName === "login") {
-        // TODO: database update
-        return {loggedIn: true}
+        return {loggingIn: true}
       } else if (eventTargetName === "logout") {
-        // TODO: database update
         return INITIAL_STATE
       } else {
-        return {[eventTargetName]: event.target.value}
+        return {[eventTargetName]: eventTargetValue}
       }
+    }, async() => {
+      this.databaseRequest()
     })
   }
 
